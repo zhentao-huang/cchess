@@ -1,0 +1,7 @@
+assets/*
+bin/*
+gen/*
+libs/*
+src/*
+.DS_Store
+

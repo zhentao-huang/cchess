@@ -1,0 +1,142 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Test Chat Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/pub/jquery.mobile.css" />
+	<script src="/pub/jquery.js"></script>
+	<script src="/pub/jquery.mobile.js"></script>
+	<script src="/pub/jquery.base64.js"></script>
+        <script src="/pub/chat.js"></script>
+        <script>
+var player = null;
+
+function reg()
+{
+    player = getPlayer();
+    if (player)
+    {
+        player.reg();
+    }
+    else
+    {
+        alert("Name is empty");
+    }
+}
+
+function query()
+{
+    var text = $('#message').attr('value');
+    player = getPlayer();
+    if (player)
+    {
+        player.query(text);
+    }
+}
+
+function send()
+{
+    var text = $('#message').attr('value');
+    player = getPlayer();
+    if (player)
+    {
+        player.send(text);
+    }
+}
+
+function fill(data)
+{
+    append(data);
+}
+
+function result(data)
+{
+    var text = JSON.stringify(data);
+    $('#console').text($('#console').text() + text + '\n');
+}
+
+function append(data)
+{
+    var msgs = []
+    for (var i in data)
+    {
+        msgs.push("From " + data[i].id + " : " + data[i].message);
+    }
+    msgs.push('');
+    $('#console').text($('#console').text() + msgs.join('\n'));
+}
+
+function reattach()
+{
+    var name = $('#name').attr('value');
+    if (name)
+    {
+        player = new chater(name);
+        player.setup = {
+            'reg': fill,
+            'listen': fill,
+            'query': result,
+        };
+        player.listen();
+    }
+    else
+    {
+        alert("Name is empty");
+    }
+}
+
+function getPlayer(player)
+{
+    if (!player)
+    {
+        var name = jQuery('#name').attr('value');
+        if (name)
+        {
+            player = new chater(name);
+            player.setup = {
+                'reg' : fill,
+                'listen' : fill,
+                'query' : result,
+                'bye' : fill,
+            };
+        }
+    }
+    return player; 
+}
+
+function bye()
+{
+    player = getPlayer(player);
+    if (!!player)
+    {
+        player.bye();
+    }
+}
+
+
+        </script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Test Chat Page</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<p>Hello world</p>		
+            <input id='name' type='text' />
+            <input id ='message' type='text' />
+            <input type='button' value='Register' onclick='reg()'/>
+            <input type='button' value='Query' onclick='query()'/>
+            <input type='button' value='Send' onclick='send()'/>
+            <input type='button' value='Reattach' onclick='reattach()'/>
+            <input type='button' value='Goodbye', onclick='bye()'/>
+            <textarea id='console' rows='15'></textarea>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>
