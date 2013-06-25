@@ -54,7 +54,7 @@ function Chat(req, res)
         else                        // Else conduct to instance User 
         {
             regs.register(this.id, this.ip)
-            regs.send({id:this.id,message:'registered'});
+            regs.send({id:this.id, type:'string', message:'registered'});
             this.message = [{id:this.id, reply:'success', message:'The user is registered success'}];
         }
         
@@ -92,7 +92,7 @@ function Chat(req, res)
             console.log(['Chat', this.id, ' : After convert :', JSON.stringify(message)].join(' '));
             if (message)
             {
-                this.message = [{id:this.id, reply:'success', message:'sent success'}];
+                this.message = [{id:this.id, reply:'success', type:'string', message:'sent success'}];
                 regs.send(message);
             }
             else
@@ -114,7 +114,8 @@ function Chat(req, res)
     {
         if (message)
         {
-            message = {id:this.id, message:message};
+            message = JSON.parse(message);
+            message.id = this.id;
         }
 
         return message;

@@ -10,6 +10,7 @@ function chater(id)
 
     this.id = id;
     this.state = "standby";
+    this.goon = true;
 
     this.perform = function(state)
     {
@@ -54,10 +55,9 @@ function chater(id)
             url : this.comm + this.id + "/listen",
             success : function(data)
             {
-                self.perform('listen', data)
-                if (data[0].reply == 'success' ||
-                    data[0].id != self.id ||
-                    data[0].reply != 'goodbye')
+                //alert(JSON.stringify(data));
+                self.perform('listen', data);
+                if (self.goon)
                 {
                     self.listen();
                 }
@@ -71,13 +71,13 @@ function chater(id)
         this.state = 'listen';
     }
 
-    this.send = function(message)
+    this.send = function(message, type)
     {
         var self = this;
         jQuery.ajax({
             type: 'POST',
             url : this.comm + this.id + "/send",
-            data : message,
+            data : JSON.stringify({'message': message, 'type':type}),
             success : function(data)
             {
                 self.perform('send', data);

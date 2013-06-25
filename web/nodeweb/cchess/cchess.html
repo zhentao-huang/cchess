@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <base href="/cchess/chess.html"></base>
     <link rel="stylesheet" type="text/css" media="screen" href="cchess.css" />
     <script type="text/javascript" src="/pub/jquery.js"></script>
@@ -28,12 +29,12 @@
         {
             if (this.match.play.isMyTurn())
             {
-                $("#status")[0].innerHTML = "My Turn"
+                $("#status")[0].innerHTML = "您的回合，请行棋"
 //                $("#shout")[0].disabled = true;
             }
             else
             {
-                $("#status")[0].innerHTML = "Opponent's Turn"
+                $("#status")[0].innerHTML = "对方行棋，请等待"
 //                $("#shout")[0].disabled = false;
             }
         }

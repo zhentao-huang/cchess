@@ -36,7 +36,7 @@ var registry = {
     },
     'goodbye': function(id)
     {
-        var message = {id:id, reply:'goodbye', message:'goodbye'};
+        var message = {id:id, reply:'goodbye', type:'string', message:'goodbye'};
         console.log('Registry send goodbye message ' + JSON.stringify(message));
         this.queue.enque(message);
         this.notifyAll();
@@ -131,8 +131,8 @@ var registry = {
                 function()
                 {
                     console.log('sys : heartbeat = ' + self.count);
-                    self.send({id:'sys', count:self.count++, message:'heart beat'});
-                }, 
+                    self.send({id:'sys', count:self.count++, type:'string', message:'heart beat'});
+                },
                 60000
             );
             this.count = 0;
@@ -207,7 +207,7 @@ function User(id, ip)
         console.log(this.id + ' is waiting for message');
         if (this.offline)
         {
-            registry.send({id:this.id, message:'online'});
+            registry.send({id:this.id, type:'string', message:'online'});
             this.offline = false;
         }
         if (q.check(this.id))
@@ -238,7 +238,7 @@ function User(id, ip)
                 this.chat.removeAllListeners();
             }
             this.chat = null;
-            registry.send({id:this.id, message:'broken'});
+            registry.send({id:this.id, type:'string', message:'broken'});
             this.offline = true;
             this.removeAllListeners();
             this.start(0);
@@ -291,6 +291,7 @@ function User(id, ip)
         }
         
         this.chat.message = msgs;
+        console.log(this.id + " : " + JSON.stringify(msgs));
 
         this.chat.goemit('message');
         this.chat = null;

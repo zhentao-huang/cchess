@@ -5,19 +5,73 @@
     <base href="/cchess/game.html"></base>
     <link rel="stylesheet" type="text/css" media="screen" href="/pub/console.css" />
     <META name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <META http-equiv="Pragma" content="no-cache"/>
     <script src="/pub/jquery.js"></script>
+    <script src="/pub/chat.js"></script>
     <script type="text/javascript">
-	// <![CDATA[
+        var nexus = null;
+        var s;
 	$(document).ready(function() 
 	{
             $("#localurl").text(window.location.href);
             var loc = window.location.protocol + "//" +  window.location.host;
-            $("#redurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
-            $("#blackurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
+            //$("#redurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
+            $("#redqr").attr("src", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
+            $("#blackqr").attr("src", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
+            //$("#blackurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
+            //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
         }
-	// ]]>
+
 	);
+        function choose(side)
+        {
+            var op = getOpponent(side);
+            s = side;
+            //var loc = window.location.protocol + "//" +  window.location.host;
+            //$("#sideQR").attr("src", "/qr/" + encodeURIComponent(loc + $("#" + op).attr("href")));
+            //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
+            //$("#" + side + "div").hide();
+            window.open("#openModal"+op);
+            nexus = new chater("tmp")
+            nexus.setup = {
+                'listen': enterGame,
+                'bye': launchGame
+            }
+            nexus.reg()
+
+/*             $("#sideqr").attr("src", "/qr/"+encodeURIComponent(loc + $("#" + op).attr("href"))).one('load', function()
+            		{window.open('#openModal')}).each(function() { if (this.complete) $this.load() }); */
+        }
+
+        function getOpponent(side)
+        {
+            switch (side)
+            {
+            case "red":
+                return "black";
+            case "black":
+                return "red";
+            }
+        }
+
+        function enterGame(data)
+        {
+            var msg
+            for (var i in data)
+            {
+                if (data[i].message === "registered")
+                {
+                    nexus.bye()
+                    nexus.goon = false;
+                }
+            }
+        }
+
+        function launchGame()
+        {
+            window.open("/cchess/cchess.html?side=" + s);
+        }
 	
 	</script>
     <META http-equiv="Cache-Control" content="no-cache,no-store"/>
@@ -25,35 +79,54 @@
 <body>
      
     <div id="page">
-        <h1 class="pageheader">Chinese Chess</h1>
+        <h1 class="pageheader">对战中国象棋</h1>
         <div id="content">
-            <h2>Welcome to the Chinese Chess!</h2>
+            <h2>准备</h2>
             <img src="/cchess/icon.png" alt="Logo" width="96" height="96" style="float: right;" />
-            <p>Please let your opponent choose side by scanning QR code</p>
-            <p>Then click the icon of the another side to enter game</p>
+            <p>先和朋友联入同一个Wifi网内，如果没有Wifi网络，可以打开Android手机的Wifi热点</p>
             <p/>           
-            <p>The home url is <span id="localurl"></span></p>
+            <p>你朋友的手机或平板,不管安卓还是苹果，是不需要安装游戏的，只有二维码扫描应用就可以了</p>
+            <p>没有扫描器也可以在浏览器中输入这个地址 <span id="localurl"></span></p>
         </div>
         
     </div>
     
     <div>
+        <h2> 第一步，请你先选择一方</h2>
         <table>
             <tr>
                 <td><a id="red" href="/cchess/cchess.html?side=red"><img src="/cchess/rshuai.png" width="55" height="55"></img></a></td>
-                <td> Move first </td>
-                <td><a id="redurl">QR</a></td>
+                <td>红先</td>
+                <td><a id="redurla" href="javascript:choose('red')">选红方</a></td>
             </tr>
             <tr>
                 <td><a id="black" href="/cchess/cchess.html?side=black"><img src="/cchess/bjiang.png" width="55" height="55"></img></a></td>
-                <td> Move later </td>
-                <td><a id="blackurl">QR</a></td>
+                <td>黑后</td>
+                <td><a id="blackurla" href="javascript:choose('black')">选黑方</a></td>
             </tr>
         </table>
     </div>
+    <div id="openModalblack" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>第二步让对手扫描下面的二维码进入游戏</h2>
+            你已选择了红棋，你的对手将执黑
+            <div align="center"><img id="blackqr" width="200px" height="200px"/> </div>
+            <p> 推荐用"条码扫描器"</p>
+        </div>
+    </div>
+    <div id="openModalred" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>第二步让你对手用扫描扫下面的条码</h2>
+            你已选择了黑棋，你的对手将执红棋，你先行
+            <div align="center"><img id="redqr" width="200px" height="200px"/> </div>
+            <p> 推荐用"条码扫描器"</p>
+        </div>
+    </div>
     
     <div id="footer">
-        Served up by Node.js.<br />Now with 100% more awesome.
+        Powered by ShuttlePlay.
     </div>
 </body>
 </html>

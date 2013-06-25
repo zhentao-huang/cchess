@@ -23,14 +23,17 @@ function game(match, id)
 
     this.received = function(data)
     {
+        var goon = true;
+        var msg;
         for (var i in data)
         {
             msg = data[i];
-            if (msg.id === 'sys')
-            {
-                this.handleSysMessage(msg);
-            }
-            else
+            //if (msg.id === 'sys')
+            //{
+            //    this.handleSysMessage(msg);
+            //}
+            //else
+            if (msg.type === 'cchess')
             {
                 this.handleGameMessage(msg);
             }
@@ -56,6 +59,7 @@ function game(match, id)
 
     this.handleGameMessage = function(msg)
     {
+        //alert(this.id + " handle game!");
         var obj = msg.message;
         if (!!obj)
         {
@@ -73,7 +77,7 @@ function game(match, id)
         if (step.isMine)
         {
             var str = JSON.stringify(step);
-            this.comm.send(str);
+            this.comm.send(str, 'cchess');
         }
 
         this.match.play.toggleTurn();
