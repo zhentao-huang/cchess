@@ -7,6 +7,7 @@ function main()
     // Import modules
     var cb = require("./callback")
     //var mime = require("./mime")
+    var config = require("./config")
     var http = require('http')
     var url = require('url')
     var util = require('util')
@@ -17,7 +18,7 @@ function main()
     var user = require('./user')
 
     // For nodeweb path dispatch
-    var rootroute = ['pub', 'cchess', 'qr', 'chat', ]
+    // var rootroute = ['pub', 'cchess', 'qr', 'chat', ]
 
     // Function object to store HTTP response headers.
     function webres()
@@ -29,9 +30,10 @@ function main()
     function NodeWeb()
     {
         this.server = http.createServer(this.callback('dispatch'))
-        this.webroot = process.cwd() + '/pub';
-        this.port = 8000
-        this.address = '0.0.0.0'
+        
+        this.webroot = path.resolve(process.argv[1], '../../web');
+        this.port = config.port
+        this.address = config.address
         this.sessions = []
     }
 
@@ -63,29 +65,12 @@ function main()
         cb.initStateMachine(this)        
         this.req = req
         this.res = res
-        this.webroot = scriptPath() + '/pub';
+        this.webroot = web.webroot
         this.path = '/'
-//        console.log('webroot = ' + this.webroot);
 
         // State Machine 
         this.set({
-            "states" : [
-                ["urlparse", 4, 10, 12, 9, 11 ],    //  0
-                ["filereq", 2, 3, 4, 5],            //  1
-                ["filedone", 6],                    //  2
-                ["restreq", 6],                     //  3
-                ["notfound", 6],                    //  4
-                ["fileerr", 6],                     //  5
-                ["done", -1],                       //  6
-                ["user", 6],                        //  7
-                ['message', 6],                     //  8
-                ['qr', 6],                          //  9
-                ['pub', 1],                         // 10
-                ['chat', 4, 6],                     // 11
-                ['cchess', 1],                      // 12
-                ['prepare', 0],                     // 13
-            ]
-        })
+            "states" : config.states        })
 
         // Collect post data
         this.collectData = function(data)
@@ -101,9 +86,17 @@ function main()
             this.req.data = '';
             console.log('NodeSession : req readable = '+ req.readable)
 
-            req.setEncoding('utf8');
-            req.on('data', this.callback('collectData'));
-            req.once('end', this.result(1));
+            if (this.req.method == 'POST' && req.readable)
+            {
+                req.setEncoding('utf8');
+                req.on('data', this.callback('collectData'));
+                req.once('end', this.result(1));
+            }
+            else
+            {
+                this.result(1);
+                this.go();
+            }
         }
 
         this.filedone = function()
@@ -142,6 +135,21 @@ function main()
             this.go();
         }
 
+        this.redirect = function()
+        {
+            var url = this.req.url;
+            if (url.charAt(url.length -1) != '/')
+            {
+                url += '/'
+            }
+            url += config.indexfile;
+            this.res.writeHead(301, 
+                    {'Location':url});
+            this.res.end();
+            this.result(1);
+            this.go();
+        }
+
         this.done = function()
         {
 //            console.log("Access " + this.req.url + " done");
@@ -159,7 +167,8 @@ function main()
             if (r >= 0) this.path = path.join(this.path, it)
             r += 2
 
-            this.result(r);
+            return r;
+//            this.result(r);
         }
 
         this.urlparse = function()
@@ -168,24 +177,34 @@ function main()
             this.reqobj = url.parse(this.req.url)
 //            console.log("Accsse " + this.req.url);
 
-            if (this.reqobj.pathname == '/favicon.ico')
-            {
-                this.reqobj.path = '/pub/favicon.ico'
-            }
+//            if (this.reqobj.pathname == 'favicon.ico')
+//            {
+//                this.reqobj.path = '/pub/favicon.ico'
+//            }
 
             var p = this.reqobj.path.split('/');
+            if (p.indexOf('..') >=0)
+            {
+                this.result(1);
+                this.go();
+                return;
+            }
             this.reqobj.rest = p;
             req.rest = p;
-            this.pathparse(rootroute)
+            var r = this.pathparse(config.rootroute);
+            this.result(r+1);
+            this.filepath = this.webroot + this.reqobj.pathname
             this.go();
 
         }
 
-        this.pub = function()
+        this.fileaccess = function()
         {
-            p = path.join.apply(null, this.reqobj.rest)
-            p = p.split('?')[0]            
-            this.filepath = path.join(scriptPath(), this.path, p);
+//            if (this.filepath.charAt(this.filepath.length - 1) === '/')
+//            {
+//                this.filepath += config.indexfile
+//                console.log("Append indexfile");
+//            }
 //            console.log("Access file : " + this.filepath)
             this.filereq = new fh.FileHandler(this.filepath);
 
@@ -204,8 +223,6 @@ function main()
             this.go();
         }
 
-        this.cchess = this.pub
-        
         this.qr = function()
         {
             str = path.join.apply(null,this.reqobj.rest)
@@ -229,6 +246,7 @@ function main()
             this.chatObj = new chat.Chat(req, res);
         }
         
+        /*
         this.reg = function()
         {
             this.user = new user.User(id, req, res);
@@ -294,6 +312,7 @@ function main()
 	    this.go();
 	    return;
 	}
+        */
 
     }
 
@@ -311,14 +330,7 @@ function main()
     {
         var session = new NodeSession(req, res);
         this.sessions.push(session);
-        if (req.method == 'POST' && req.readable)
-        {
-            session.start(13);   
-        }
-        else
-        {
-            session.start();
-        }
+        session.start();
     }
 
     var web = new NodeWeb()

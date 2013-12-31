@@ -87,52 +87,16 @@ filehandler.prototype.filter = function()
         return 
     }
 
-    switch (ext)
+    var mime = require('./mime');
+
+    this.mime = mime[ext];
+    if (!!this.mime)
     {
-        case "html":
-        case "htm":
-            this.mime = "text/html"
-            this.result(1)
-            break;
-        case "txt":
-            this.mime = "text/plain"
-            this.result(1)
-            break;
-        case "json":
-            this.mime = "application/json";
-            this.result(1)
-            break;
-        case "js":
-            this.mime = "text/javascript"
-            this.result(1)
-            break;
-        case "png":
-            this.mime = "image/png"
-            this.result(1)
-            break;
-        case "jpg":
-            this.mime = "image/jpeg"
-            this.result(1)
-            break;
-        case "ico":
-            this.mime = "image/x-icon"
-            this.result(1)
-            break;
-        case "css":
-            this.mime = "text/css"
-            this.result(1)
-            break;
-        case "manifest":
-            this.mime = "text/cache-manifest"
-            this.result(1)
-            break;
-        case 'apk':
-            this.mime = "applicaiton/octet-stream";
-            this.result(1);
-            break;
-        default:
-            this.result(2)
-            break;
+        this.result(1)
+    }
+    else
+    {
+        this.result(2)
     }
 
     this.go()
