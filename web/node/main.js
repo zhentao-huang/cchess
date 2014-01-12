@@ -32,6 +32,7 @@ function main()
         this.server = http.createServer(this.callback('dispatch'))
         
         this.webroot = path.resolve(process.argv[1], '../../web');
+        console.log("Webroot is " + this.webroot);
         this.port = config.port
         this.address = config.address
         this.sessions = []
@@ -84,7 +85,7 @@ function main()
         this.prepare = function()
         {
             this.req.data = '';
-            console.log('NodeSession : req readable = '+ req.readable)
+            console.log('NodeSession : req url = '+ req.url)
 
             if (this.req.method == 'POST' && req.readable)
             {

@@ -32,14 +32,15 @@
             //$("#sideQR").attr("src", "/qr/" + encodeURIComponent(loc + $("#" + op).attr("href")));
             //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
             //$("#" + side + "div").hide();
-            window.open("#openModal"+op);
+            window.open("/cchess/cchessmain.html?side=" + side);
+            /*
             nexus = new chater("tmp")
             nexus.setup = {
                 'listen': enterGame,
                 'bye': launchGame
             }
             nexus.reg()
-
+            */
 /*             $("#sideqr").attr("src", "/qr/"+encodeURIComponent(loc + $("#" + op).attr("href"))).one('load', function()
             		{window.open('#openModal')}).each(function() { if (this.complete) $this.load() }); */
         }
@@ -106,6 +107,7 @@
             </tr>
         </table>
     </div>
+    <!--
     <div id="openModalblack" class="modalDialog">
         <div>
             <a href="#close" title="Close" class="close">X</a>
@@ -124,7 +126,7 @@
             <p> 推荐用"条码扫描器"</p>
         </div>
     </div>
-    
+    -->
     <div id="footer">
         Powered by ShuttlePlay.
     </div>

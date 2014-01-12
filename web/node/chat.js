@@ -45,7 +45,7 @@ function Chat(req, res)
     this.reg = function()
     {
         // Register User
-            // Check whether user registed
+        // Check whether user registed
         console.log(['Chat : ', this.id, ': register'].join(' '));
         if (regs.isExists(this.id)) // If yes, construct reg failure message and return
         {
