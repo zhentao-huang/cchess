@@ -1,3 +1,4 @@
+port=7425
 main=node/main.js
 index=/cchess/game.html
 runlabel=ChinaChess

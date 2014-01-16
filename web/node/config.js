@@ -3,7 +3,6 @@
 module.exports = 
 {
     "address":'0.0.0.0',
-    "port":8000,
     "rootroute":['qr', 'chat'],
     "indexfile":"index.html",
     "states":[

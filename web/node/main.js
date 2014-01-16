@@ -8,6 +8,8 @@ function main()
     var cb = require("./callback")
     //var mime = require("./mime")
     var config = require("./config")
+    var StringDecoder = require('string_decoder').StringDecoder;
+    var decoder = new StringDecoder('utf8');
     var http = require('http')
     var url = require('url')
     var util = require('util')
@@ -33,9 +35,38 @@ function main()
         
         this.webroot = path.resolve(process.argv[1], '../../web');
         console.log("Webroot is " + this.webroot);
-        this.port = config.port
+        this.props = readProps();
+        if (!!this.props.port)
+        {
+            this.port = Number(this.props.port);
+        }
+        else
+        {
+            this.port = 8000;
+        }
+        console.log("port = " + this.port);
+
         this.address = config.address
         this.sessions = []
+    }
+
+    function readProps()
+    {
+        var pf = path.resolve(process.argv[1], '../../config.props');
+        var p = fs.readFileSync(pf);
+        var t = decoder.write(p);
+        var sa = t.split(/[\r\n]+/);
+        var c = {};
+        var st = /^([^=]+)=(.*)$/;
+        for (var l in sa)
+        {
+            var m = sa[l].match(st);
+            if (m != null)
+            {
+                c[m[1]]=m[2];
+            }
+        }
+        return c;
     }
 
     // Treat the path of this script as root to store scripts
