@@ -76,6 +76,7 @@ function game(match, id)
     {
         if (step.isMine)
         {
+        	step.id = this.comm.id;
             var str = JSON.stringify(step);
             this.comm.send(str, 'cchess');
         }

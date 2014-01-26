@@ -1,5 +1,6 @@
 var cb = require('./callback');
 var user = require('./user');
+var fs = require('fs');
 
 
 /* 
@@ -10,24 +11,34 @@ var user = require('./user');
             Queue           -- Message Queue
 
 */
-function Chat(req, res)
+function Chat(req, res, logpath, sid)
 {
     cb.initStateMachine(this);
 
     this.id = req.rest.shift()
     this.action = req.rest.shift()
     this.ip = req.connection.remoteAddress;
+    this.logfile = logpath + '/' + sid;
     var regs = user.getRegistry();
+    if (!regs.logfile)
+    {
+        if (!sid)
+        {
+            sid = Math.floor(Math.random() * 10000000);
+        }
+        regs.logfile = logpath + '/' + sid;
+    }
 
     this.set({
         states: [
-        ['parse', -1,1,2,3,4,5],        // 0
+        ['parse', -1,1,2,3,4,5,7],      // 0
         ['reg', 6],                     // 1
         ['send', 6],                    // 2
         ['query', 6],                   // 3
         ['listen', 6],                  // 4
         ['bye', 6],                     // 5
         ['reply', -2],                  // 6
+        ['load', 6],                    // 7
         ]});
         
     this.parse = function()
@@ -40,6 +51,15 @@ function Chat(req, res)
         }
         this.result(r);
         this.go();
+    }
+
+    this.writeLog = function(text)
+    {
+        if (fs.existsSync(regs.logfile))
+        {
+            fs.appendFileSync(regs.logfile, ',\n');
+        }
+        fs.appendFileSync(regs.logfile, text);
     }
 
     this.reg = function()
@@ -88,6 +108,7 @@ function Chat(req, res)
 
         if (message)
         {
+            this.writeLog(message);
             message = this.messageToObject(message);
             console.log(['Chat', this.id, ' : After convert :', JSON.stringify(message)].join(' '));
             if (message)

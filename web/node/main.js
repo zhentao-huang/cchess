@@ -17,7 +17,8 @@ function main()
     var fs = require('fs')
     var chat = require('./chat.js');
     var fh = require('./filehandler')
-    var user = require('./user')
+    var user = require('./user');
+    // require('./util');
 
     // For nodeweb path dispatch
     // var rootroute = ['pub', 'cchess', 'qr', 'chat', ]
@@ -206,7 +207,7 @@ function main()
         this.urlparse = function()
         {
             req.removeAllListeners(); 
-            this.reqobj = url.parse(this.req.url)
+            this.reqobj = url.parse(this.req.url, true)
 //            console.log("Accsse " + this.req.url);
 
 //            if (this.reqobj.pathname == 'favicon.ico')
@@ -275,7 +276,9 @@ function main()
 
         this.chat = function()
         {
-            this.chatObj = new chat.Chat(req, res);
+            var sid = this.reqobj.query.sid;
+            var logpath = this.webroot + config.chatlog
+            this.chatObj = new chat.Chat(req, res, logpath, sid);
         }
         
         /*

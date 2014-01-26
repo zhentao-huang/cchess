@@ -5,6 +5,7 @@ module.exports =
     "address":'0.0.0.0',
     "rootroute":['qr', 'chat'],
     "indexfile":"index.html",
+    "chatlog" : "/cchess",
     "states":[
                 ["prepare", 12],                    //  0
                 ["filereq", 2, 3, 4, 5],            //  1
