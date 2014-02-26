@@ -19,11 +19,36 @@
         var set
         $(document).ready(function() {
 
-            var side = queryParam('side')
-            var match = startGame(side);
-            set = perform(match, side)
-            updateTitle()
-        	
+            side = queryParam('side')
+
+            match = startGame(side);
+        
+            var sid = queryParam("sid");
+
+            if (!sid)
+            {
+                set = perform(match, side);
+                updateTitle();
+            }
+            else
+            {
+                jQuery.ajax({
+                    url:"/loadlog/" + sid,
+                    success:function(data)
+                    {
+                        for (var i in data)
+                        {
+                            console.log(JSON.stringify(data[i].message));
+                        }
+                        set = perform(match, side, data);
+                        updateTitle();
+                    },
+                    error:function(e)
+                    {
+                        alert(e);
+                    }
+                });
+            }
             //var qr = queryParam('qr')
             //$("#localurl").text(window.location.href);
             //var loc = window.location.protocol + "//" +  window.location.host;
@@ -85,7 +110,7 @@
             }
         }
 
-        function enterGame(data)
+/*         function enterGame(data)
         {
             var msg
             for (var i in data)
@@ -96,7 +121,7 @@
                     nexus.goon = false;
                 }
             }
-        }
+        } */
         
         function launchGame()
         {

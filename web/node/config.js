@@ -3,9 +3,9 @@
 module.exports = 
 {
     "address":'0.0.0.0',
-    "rootroute":['qr', 'chat'],
+    "rootroute":['qr', 'chat', 'listlog', 'loadlog'],
     "indexfile":"index.html",
-    "chatlog" : "/cchess",
+    "chatlog" : "/playlog",
     "states":[
                 ["prepare", 12],                    //  0
                 ["filereq", 2, 3, 4, 5],            //  1
@@ -19,7 +19,9 @@ module.exports =
                 ['fileaccess', 1],                  //  9 
                 ['qr', 6],                          // 10
                 ['chat', 4, 6],                     // 11
-                ["urlparse", 4, 9, 10, 11]          // 12 
+                ["urlparse", 4, 9, 10, 11, 13, 14], // 12 
+                ['listlog', 6],                     // 13
+                ['loadlog', 6]						// 14
         ]
 
 }

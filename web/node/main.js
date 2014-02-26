@@ -35,6 +35,9 @@ function main()
         this.server = http.createServer(this.callback('dispatch'))
         
         this.webroot = path.resolve(process.argv[1], '../../web');
+        
+        this.logpath = this.webroot + config.chatlog;
+
         console.log("Webroot is " + this.webroot);
         this.props = readProps();
         if (!!this.props.port)
@@ -100,6 +103,7 @@ function main()
         this.res = res
         this.webroot = web.webroot
         this.path = '/'
+        this.logpath = web.logpath;
 
         // State Machine 
         this.set({
@@ -117,7 +121,7 @@ function main()
         this.prepare = function()
         {
             this.req.data = '';
-            console.log('NodeSession : req url = '+ req.url)
+//            console.log('NodeSession : req url = '+ req.url)
 
             if (this.req.method == 'POST' && req.readable)
             {
@@ -208,6 +212,7 @@ function main()
         {
             req.removeAllListeners(); 
             this.reqobj = url.parse(this.req.url, true)
+            console.log("Reqobj = " + JSON.stringify(this.reqobj));
 //            console.log("Accsse " + this.req.url);
 
 //            if (this.reqobj.pathname == 'favicon.ico')
@@ -215,7 +220,7 @@ function main()
 //                this.reqobj.path = '/pub/favicon.ico'
 //            }
 
-            var p = this.reqobj.path.split('/');
+            var p = this.reqobj.pathname.split('/');
             if (p.indexOf('..') >=0)
             {
                 this.result(1);
@@ -256,6 +261,37 @@ function main()
             this.go();
         }
 
+        this.listlog = function()
+        {
+            var files = fs.readdirSync(this.logpath);
+            var ret = {}
+            for (var f in files)
+            {
+                ret[files[f]] = fs.statSync(this.logpath + '/' + files[f]);    
+            }
+
+            var wr = new webres()
+            wr['Content-Type'] = 'application/json';
+
+            this.res.writeHead(200, wr);
+            this.res.end(JSON.stringify(ret));
+            this.result(1)
+            this.go()
+        }
+        
+        this.loadlog = function()
+        {
+        	var plog = this.reqobj.rest.shift(); 
+        	var data = '[' + fs.readFileSync(this.logpath + '/' + plog, 'utf8') + ']';
+        	var wr = new webres()
+        	wr['Content-Type'] = 'application/json';
+        	
+        	this.res.writeHead(200, wr);
+        	this.res.end(data);
+        	this.result(1);
+        	this.go();
+        }
+
         this.qr = function()
         {
             str = path.join.apply(null,this.reqobj.rest)
@@ -277,8 +313,8 @@ function main()
         this.chat = function()
         {
             var sid = this.reqobj.query.sid;
-            var logpath = this.webroot + config.chatlog
-            this.chatObj = new chat.Chat(req, res, logpath, sid);
+            console.log("sid = " + sid);
+            this.chatObj = new chat.Chat(req, res, this.logpath, sid);
         }
         
         /*

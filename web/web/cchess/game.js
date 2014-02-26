@@ -1,11 +1,11 @@
-function perform(match, comm)
+function perform(match, comm, playlog)
 {
-    var set = new game(match, comm)
+    var set = new game(match, comm, playlog)
     set.launch()
     return set
 }
 
-function game(match, id)
+function game(match, id, playlog)
 {
     this.match = match
     this.comm = new chater(id);
@@ -76,7 +76,7 @@ function game(match, id)
     {
         if (step.isMine)
         {
-        	step.id = this.comm.id;
+            step.id = this.comm.id;
             var str = JSON.stringify(step);
             this.comm.send(str, 'cchess');
         }
@@ -84,7 +84,36 @@ function game(match, id)
         this.match.play.toggleTurn();
         updateTitle()
     }
-
+    
+    this.load = function()
+    {
+    	if (!!playlog)
+    	{
+                this.match.loading = true;
+    		for (var t in playlog)
+    		{
+    			var turn = JSON.parse(playlog[t].message);
+    			console.log("turn = " + turn);
+                        turn.isMine = false;
+    			if (turn.id != this.comm.id)
+    			{
+    				console.log("Perform opponent's step")
+    				console.log("this.comm.id = " + this.comm.id + "; turn.id = " + turn.id);
+    				this.match.performMove(turn);
+    			}
+    			else
+    			{
+    				console.log("Perform self step");
+    				this.match.selfMove(turn.oldX, turn.oldY, turn.newX, turn.newY);
+    			}
+    			console.log("perform turn ", JSON.stringify(turn));
+    		}
+                this.match.loading = false;
+    	}
+    }
+    	
+    console.log("game is started");
+    this.match.setLoadHandler(this.callback("load"));
     this.match.setTurnHandler(this.callback("onestep"));
 }
 

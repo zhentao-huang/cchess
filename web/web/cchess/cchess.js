@@ -248,11 +248,14 @@ function chessmatch(comp, pmap, bd, aw)
             }
         }
     }
+    
+    var pieceCount = 0;
 
     this.drawChessman = function(context, cm, x, y)
     {
         if (cm.alive)
         {
+        	var self = this;
             var cimg = new Image()
             cimg.draggable = true;
             cimg.src = this.pmap.get(cm.type)
@@ -273,6 +276,11 @@ function chessmatch(comp, pmap, bd, aw)
                 cm.savedPos = {"x":x,"y":y,"w":width,"h":height};
 
                 context.drawImage(this, x, y, width, height);
+                
+                if (++pieceCount == 32)
+                {
+                    self.emitLoadEvent();
+                }
             },
             false);
 
@@ -305,10 +313,14 @@ function chessmatch(comp, pmap, bd, aw)
 
     this.pickup = function(pos)
     {
+    	console.log("pos = " + JSON.stringify(pos) + "; this.comp = " + this.comp + "; ps = " + this.comp.ps);
+    	
+    	console.log('pos.iy = ' + pos.iy + "; pos.ix = " + pos.ix);
         var cm = this.comp.ps[pos.iy][pos.ix];
         if (cm)
         {
             cm.pointOff = {"x": 0,"y": 0}
+            //console.log('set dcm = ' + JSON.stringify(cm));
             this.dcm = cm
         }
     }
@@ -351,7 +363,7 @@ function chessmatch(comp, pmap, bd, aw)
         {
             return false;
         }
-        var isMine = this.play.isMyChess(cm)
+        var isMine = this.play.isMyChess(cm) && !this.loading;
         ret = {oldX:cm.x,oldY:cm.y,newX:x, newY:y, isMine:isMine}
         this.comp.ps[cm.y][cm.x] = undefined
         this.comp.ps[y][x] = cm
@@ -382,6 +394,7 @@ function chessmatch(comp, pmap, bd, aw)
     this.moveChessman = function(x, y)
     {
         var cm = this.dcm
+        //console.log("cm = " + JSON.stringify(cm));
         this.context.putImageData(cm.savedImg, cm.savedPos.x, cm.savedPos.y);
         cm.savedPos.x = x - cm.pointOff.x
         cm.savedPos.y = y - cm.pointOff.y
@@ -457,6 +470,19 @@ function chessmatch(comp, pmap, bd, aw)
             this.turnHandler.call(this, obj)
         }
     }
+    
+    this.setLoadHandler = function(callback)
+    {
+    	this.loadHandler = callback;
+    }
+    
+    this.emitLoadEvent = function()
+    {
+    	if (this.loadHandler)
+    	{
+    		this.loadHandler.call(this);
+    	}
+    }
 
     this.getMySide = function()
     {
@@ -465,13 +491,21 @@ function chessmatch(comp, pmap, bd, aw)
 
     this.performMove = function(turn)
     {
-        oldpos = this.rotate(turn.oldX, turn.oldY)
-        newpos = this.rotate(turn.newX, turn.newY)
+    	console.log("turn oldX = " + turn.oldX + "; oldY = " + turn.oldY + "; newX = " + turn.newX + "; newY = " + turn.newY);
+        var oldpos = this.rotate(turn.oldX, turn.oldY)
+        var newpos = this.rotate(turn.newX, turn.newY)
 
-        oldpos = this.getChessmanPosByPoint(oldpos.x, oldpos.y)
-        newpos = this.getChessmanPosByPoint(newpos.x, newpos.y)
+        this.selfMove(oldpos.x, oldpos.y, newpos.x, newpos.y);
+    }
+    
+    this.selfMove = function(ox, oy, nx, ny)
+    {
+        var oldpos = this.getChessmanPosByPoint(ox, oy);
+        var newpos = this.getChessmanPosByPoint(nx, ny);
 
+        console.log("pickup");
         this.pickup(oldpos)
+        console.log("putdown");
         this.putdown(newpos) 
     }
 

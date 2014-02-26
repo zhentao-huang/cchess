@@ -1,5 +1,5 @@
 
-function chater(id)
+function chater(id, sid)
 {
     this.comm = location.protocol + "//" + location.hostname;
     if (location.port != '')
@@ -28,8 +28,13 @@ function chater(id)
         var self = this;
         if (this.state == 'standby')
         {
+            var regurl = this.comm + this.id + "/reg";
+            if (!!sid)
+            {
+                regurl = regurl + "?sid=" + sid;
+            }
             jQuery.ajax({
-                url: this.comm + this.id + "/reg",
+                url: regurl,
                 success : function(data)
                 {   
                     self.perform('reg', data);

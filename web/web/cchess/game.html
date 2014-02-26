@@ -12,19 +12,54 @@
     <script type="text/javascript">
         var nexus = null;
         var s;
+        var redurl = "/cchess/cchess.html?side=red";
+        var blackurl = "/cchess/cchess.html?side=black";
+
 	$(document).ready(function() 
 	{
             $("#localurl").text(window.location.href);
             var loc = window.location.protocol + "//" +  window.location.host;
-            //$("#redurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
-            $("#redqr").attr("src", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
-            $("#blackqr").attr("src", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
-            //$("#blackurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
-            //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
+
+            jQuery.ajax({
+                url:"/listlog",
+                success:function(data)
+                {
+                    var last = null;
+                    for (var l in data)
+                    {
+                        console.log("" + l + ':' + data[l].mtime);
+                        var s = data[l];
+                        if (!last)
+                        {
+                            last = l;
+                        }
+                        else if (s.mtime > data[last].mtime)
+                        {
+                            last = l;
+                        }
+                    }
+
+                    if (!!last)
+                    {
+                        $("#gametable").append("<tr><td>继续上一局</td>" +
+                            '<td><a id="red" href="javascript:choose(\'red\',\'' + last + '\')"><img src="/cchess/rshuai.png" width="55" height="55"></img></a></td>' + 
+                            '<td><a id="black" href="javascript:choose(\'black\',\'' + last + '\')"><img src="/cchess/bjiang.png" width="55" height="55"></img></a></td>' + 
+                            "</tr>");
+                    }
+                },
+                error:function(e)
+                {
+                    alert(e);
+                }
+            });
+
+            //$("#redqr").attr("src", "/qr/" + encodeURIComponent(loc + redurl));
+            //$("#blackqr").attr("src", "/qr/" + encodeURIComponent(loc + blackurl));
+
         }
 
 	);
-        function choose(side)
+        function choose(side, log)
         {
             var op = getOpponent(side);
             s = side;
@@ -32,7 +67,12 @@
             //$("#sideQR").attr("src", "/qr/" + encodeURIComponent(loc + $("#" + op).attr("href")));
             //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
             //$("#" + side + "div").hide();
-            window.open("/cchess/cchessmain.html?side=" + side);
+            var u = "/cchess/cchessmain.html?side=" + side;
+            if (!!log)
+            {
+                u = u + "&sid=" + log;
+            }
+            window.open(u);
             /*
             nexus = new chater("tmp")
             nexus.setup = {
@@ -94,16 +134,11 @@
     
     <div>
         <h2> 第一步，请你先选择一方</h2>
-        <table>
+        <table id="gametable">
             <tr>
-                <td><a id="red" href="/cchess/cchess.html?side=red"><img src="/cchess/rshuai.png" width="55" height="55"></img></a></td>
-                <td>红先</td>
-                <td><a id="redurla" href="javascript:choose('red')">选红方</a></td>
-            </tr>
-            <tr>
-                <td><a id="black" href="/cchess/cchess.html?side=black"><img src="/cchess/bjiang.png" width="55" height="55"></img></a></td>
-                <td>黑后</td>
-                <td><a id="blackurla" href="javascript:choose('black')">选黑方</a></td>
+                <td>新开一局</td>
+                <td><a id="red" href="javascript:choose('red')"><img src="/cchess/rshuai.png" width="55" height="55"></img></a></td>
+                <td><a id="black" href="javascript:choose('black')"><img src="/cchess/bjiang.png" width="55" height="55"></img></a></td>
             </tr>
         </table>
     </div>

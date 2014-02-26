@@ -18,9 +18,8 @@ function Chat(req, res, logpath, sid)
     this.id = req.rest.shift()
     this.action = req.rest.shift()
     this.ip = req.connection.remoteAddress;
-    this.logfile = logpath + '/' + sid;
     var regs = user.getRegistry();
-    if (!regs.logfile)
+    if (!regs.logfile)  // First time load
     {
         if (!sid)
         {
@@ -29,18 +28,26 @@ function Chat(req, res, logpath, sid)
         regs.logfile = logpath + '/' + sid;
     }
 
+    console.log("regs.logfile = " + regs.logfile + ", sid = " + sid);
+
     this.set({
         states: [
-        ['parse', -1,1,2,3,4,5,7],      // 0
+        ['parse', -1,1,2,3,4,5,7,8],    // 0
         ['reg', 6],                     // 1
         ['send', 6],                    // 2
         ['query', 6],                   // 3
         ['listen', 6],                  // 4
         ['bye', 6],                     // 5
         ['reply', -2],                  // 6
-        ['load', 6],                    // 7
+        ['list', 6],                    // 7
+        ['load', 6]						// 8
         ]});
         
+    this.list = function()
+    {
+    	
+    }
+    
     this.parse = function()
     {
         console.log(["Chat : ", this.id, this.action, ': parsing'].join(' '));
@@ -219,7 +226,7 @@ function Chat(req, res, logpath, sid)
     this.start();
 }
 
-Chat.route = ['reg', 'send', 'query', 'listen', 'bye'];
+Chat.route = ['reg', 'send', 'query', 'listen', 'bye', 'list', 'load'];
 
 cb.applyStateMachine(Chat)
 

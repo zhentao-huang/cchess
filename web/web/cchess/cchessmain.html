@@ -53,23 +53,60 @@
             //side = queryParam('side');
         	
             console.log("After close game");
+            
+            var sid = queryParam("sid");
             match = startGame(side);
-            set = perform(match, side);
-            updateTitle();
+            
+            if (!sid)
+            {
+                set = perform(match, side);
+                updateTitle();
+            }
+            else
+            {
+                jQuery.ajax({
+                    url:"/loadlog/" + sid,
+                    success:function(data)
+                    {
+                    	for (var i in data)
+                    	{
+                    		console.log(JSON.stringify(data[i].message));
+                    	}
+                        set = perform(match, side, data);
+                    },
+                    error:function(e)
+                    {
+                        alert(e);
+                    }
+                            
+                });
+            }
+            
+            //match = startGame(side);
+            //set = perform(match, side);
+            //updateTitle();
+
             updateDialog(side);
 
             var qr = queryParam('qr')
             $("#localurl").text(window.location.href);
             var loc = window.location.protocol + "//" +  window.location.host;
             //$("#redurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
-            $("#qrtoplay").attr("src", "/qr/" + encodeURIComponent(loc + "/cchess/cchess.html?side=" + getOpponent(side)));
+            var pp = loc + "/cchess/cchess.html?side=" + getOpponent(side);
+            var sid = queryParam('sid');
+            if (!!sid)
+            {
+                pp = pp + '&sid=' + sid;
+            }
+            $("#qrtoplay").attr("src", "/qr/" + encodeURIComponent(pp));
+            $("#playlink").attr("href", pp);
             //$("#blackurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
             //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
             
             //if (!!qr)
             //{
             //    alert("qr check");
-                choose(side);	
+                choose(side, sid);	
             //}
             console.log("choose side " + side);
             done = true;
@@ -105,7 +142,7 @@
             }
         }
         
-        function choose(side)
+        function choose(side, sid)
         {
             var op = getOpponent(side);
             s = side;
@@ -113,7 +150,7 @@
             //$("#sideQR").attr("src", "/qr/" + encodeURIComponent(loc + $("#" + op).attr("href")));
             //$(".modalDialog > div").css("width", "" +(document.body.clientWidth - 100) + "px");
             //$("#" + side + "div").hide();
-            nexus = new chater("tmp")
+            nexus = new chater("tmp", sid);
             nexus.setup = {
                 'listen': enterGame,
                 'bye': launchGame
@@ -141,7 +178,8 @@
             for (var i in data)
             {
                 console.log("current i = " + i);
-                if (data[i].message === "registered")
+                if (data[i].message === "registered" &&
+                	data[i].id === getOpponent(side))
                 {
                     nexus.bye()
                     nexus.goon = false;
@@ -180,7 +218,7 @@
         <div>
             <!--a id="closeModal" href="#close" title="Close" class="close">x</a-->
             你已选择了<span id="yourside"></span>棋，你的对手将执<span id="opside"></span>棋
-            <div align="center"><img id="qrtoplay" width="200px" height="200px"/> </div>
+            <div align="center"><a id="playlink"><img id="qrtoplay" width="200px" height="200px"/></a> </div>
             <p> 推荐用"条码扫描器"</p>
         </div>
     </div>
