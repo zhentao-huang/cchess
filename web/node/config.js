@@ -3,7 +3,7 @@
 module.exports = 
 {
     "address":'0.0.0.0',
-    "rootroute":['qr', 'chat', 'listlog', 'loadlog'],
+    "rootroute":['qr', 'chat', 'listlog', 'loadlog', 'save', 'load'],
     "indexfile":"index.html",
     "chatlog" : "/playlog",
     "states":[
@@ -19,9 +19,12 @@ module.exports =
                 ['fileaccess', 1],                  //  9 
                 ['qr', 6],                          // 10
                 ['chat', 4, 6],                     // 11
-                ["urlparse", 4, 9, 10, 11, 13, 14], // 12 
+                ["urlparse", 4, 9, 10, 11, 13, 14,
+                  			 15, 16],				// 12 
                 ['listlog', 6],                     // 13
-                ['loadlog', 6]						// 14
+                ['loadlog', 6],						// 14
+                ['save', 6],						// 15
+                ['load', 6]							// 16
         ]
 
 }

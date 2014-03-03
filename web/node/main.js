@@ -18,6 +18,7 @@ function main()
     var chat = require('./chat.js');
     var fh = require('./filehandler')
     var user = require('./user');
+    var store = {};
     // require('./util');
 
     // For nodeweb path dispatch
@@ -189,7 +190,7 @@ function main()
 
         this.done = function()
         {
-//            console.log("Access " + this.req.url + " done");
+            console.log("Access " + this.req.url + " done");
         }
         
         this.pathparse = function(route)
@@ -315,6 +316,29 @@ function main()
             var sid = this.reqobj.query.sid;
             console.log("sid = " + sid);
             this.chatObj = new chat.Chat(req, res, this.logpath, sid);
+        }
+        
+        this.save = function()
+        {
+        	var item = this.reqobj.rest.shift();
+        	store[item] = JSON.parse(this.req.data);
+        	this.res.writeHead(200);
+        	this.res.end();
+        	this.result(1);
+        	this.go();
+        }
+        
+        this.load = function()
+        {
+        	var item = this.reqobj.rest.shift();
+        	var data = JSON.stringify(store[item]);
+        	var wr = new webres()
+        	wr['Content-Type'] = 'application/json';
+        	
+        	this.res.writeHead(200, wr);
+        	this.res.end(data);
+        	this.result(1);
+        	this.go();
         }
         
         /*

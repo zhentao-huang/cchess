@@ -15,3 +15,14 @@ function queryParam(variable)
     }
     return null;
 }
+
+function save(name, value, succfunc, errfunc)
+{
+    jQuery.ajax({
+        type: 'POST',
+        url : "/save/" + name,
+        data : JSON.stringify(value),
+        success : succfunc,
+        error : errfunc
+    });
+}
