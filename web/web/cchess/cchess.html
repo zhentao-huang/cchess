@@ -24,14 +24,16 @@
             match = startGame(side);
         
             var sid = queryParam("sid");
+            
 
             if (!sid)
             {
-                set = perform(match, side);
-                updateTitle();
+/*                 set = perform(match, side);
+                updateTitle(); */
+                sid = load("sid");
             }
-            else
-            {
+/*             else
+            { */
                 jQuery.ajax({
                     url:"/loadlog/" + sid,
                     success:function(data)
@@ -48,7 +50,7 @@
                         alert(e);
                     }
                 });
-            }
+//            }
             //var qr = queryParam('qr')
             //$("#localurl").text(window.location.href);
             //var loc = window.location.protocol + "//" +  window.location.host;

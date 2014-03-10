@@ -283,7 +283,17 @@ function main()
         this.loadlog = function()
         {
         	var plog = this.reqobj.rest.shift(); 
-        	var data = '[' + fs.readFileSync(this.logpath + '/' + plog, 'utf8') + ']';
+        	var fn = this.logpath + '/' + plog;
+        	var data = '[]';
+        	if (fs.existsSync(fn))
+        	{
+        	    data = '[' + fs.readFileSync(fn, 'utf8') + ']';
+                    console.log("loadlog : " + data);
+        	}
+                else
+                {
+                    console.log(fn + " is not exists");
+                }
         	var wr = new webres()
         	wr['Content-Type'] = 'application/json';
         	

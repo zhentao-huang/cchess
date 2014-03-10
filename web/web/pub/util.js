@@ -18,11 +18,32 @@ function queryParam(variable)
 
 function save(name, value, succfunc, errfunc)
 {
+	var ok = false;
+	var error;
     jQuery.ajax({
         type: 'POST',
+        async : false,
         url : "/save/" + name,
         data : JSON.stringify(value),
-        success : succfunc,
-        error : errfunc
+        success : function(data)
+        {
+        	ok = true ;
+        },
     });
+    return ok;
+}
+
+function load(name)
+{
+	var obj = null;
+	jQuery.ajax({
+		type: 'GET',
+		async: false,
+		url : '/load/' + name,
+		success : function(data)
+		{
+			obj = data;
+		}
+	})
+	return obj;
 }

@@ -11,7 +11,11 @@
         <script>
         $(document).ready(function() {
         	item = 30;
-        	save("i1", item, function(){alert("OK")});
+        	var sr = save("i1", item);
+                alert(sr);
+                var lr = load("sid");
+                alert(lr);
+
         });
         </script>
 </head>

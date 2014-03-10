@@ -21,8 +21,20 @@
     // <![CDATA[
         var set
         var done
-        side = queryParam('side');
+        var side = queryParam('side');
+        var sid = queryParam("sid");
+        if (!sid)
+        {
+            sid = load("sid");	
+            if (!sid)
+            {
+                sid = Math.floor(Math.random() * 10000000);
+                var sr = save("sid", sid);
+                alert("save " + sid + (sr? " success" : " failed"));
+            }
+        }
         $(function() {
+        	console.log("$function");
             $("#modal").dialog({
                 autoOptn: true,
                 modal: true,
@@ -52,22 +64,22 @@
         $(document).ready(function() {
             //side = queryParam('side');
         	
-            console.log("After close game");
+            console.log("document.ready");
             
-            var sid = queryParam("sid");
             match = startGame(side);
             
-            if (!sid)
+/*             if (!sid)
             {
                 set = perform(match, side);
                 updateTitle();
             }
             else
-            {
+            { */
                 jQuery.ajax({
                     url:"/loadlog/" + sid,
                     success:function(data)
                     {
+                    	console.log("/loadlog/" + sid)
                     	for (var i in data)
                     	{
                     		console.log(JSON.stringify(data[i].message));
@@ -80,7 +92,7 @@
                     }
                             
                 });
-            }
+//            }
             
             //match = startGame(side);
             //set = perform(match, side);
@@ -93,11 +105,11 @@
             var loc = window.location.protocol + "//" +  window.location.host;
             //$("#redurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#red").attr("href")));
             var pp = loc + "/cchess/cchess.html?side=" + getOpponent(side);
-            var sid = queryParam('sid');
-            if (!!sid)
-            {
+            //var sid = queryParam('sid');
+            //if (!!sid)
+            //{
                 pp = pp + '&sid=' + sid;
-            }
+            //}
             $("#qrtoplay").attr("src", "/qr/" + encodeURIComponent(pp));
             $("#playlink").attr("href", pp);
             //$("#blackurl").attr("href", "/qr/" + encodeURIComponent(loc + $("#black").attr("href")));
