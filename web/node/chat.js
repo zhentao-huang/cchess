@@ -74,11 +74,11 @@ function Chat(req, res, logpath, sid)
         // Register User
         // Check whether user registed
         console.log(['Chat : ', this.id, ': register'].join(' '));
-        if (regs.isExists(this.id)) // If yes, construct reg failure message and return
-        {
-            this.message = [{id:this.id, reply:'failure', message:'The user is online already'}];
-        }
-        else                        // Else conduct to instance User 
+//        if (regs.isExists(this.id)) // If yes, construct reg failure message and return
+//        {
+//            this.message = [{id:this.id, reply:'failure', message:'The user is online already'}];
+//        }
+//        else                        // Else conduct to instance User 
         {
             regs.register(this.id, this.ip)
             regs.send({id:this.id, type:'string', message:'registered'});

@@ -9,9 +9,16 @@ var registry = {
     'playlog': null,
     'register': function(id, ip)
     {
-        var u = new User(id, ip);
-        this.players[id] = u;
-        this.queue.addUser(id);
+    	if (!!this.players[id])
+    	{
+    		this.players[id].ip = ip;
+    	}
+    	else
+    	{
+            var u = new User(id, ip);
+            this.players[id] = u;
+            this.queue.addUser(id);
+    	}
     },
     'verify': function(id, ip)
     {
