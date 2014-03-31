@@ -27,7 +27,7 @@ function main()
     // Function object to store HTTP response headers.
     function webres()
     {
-        this['Content-Type'] = 'text/plain'
+        this['Content-Type'] = 'text/plain; charset=utf-8';
     }
 
     // Function object Nodeweb. 
@@ -37,10 +37,9 @@ function main()
         
         this.webroot = path.resolve(process.argv[1], '../../web');
         
-        this.logpath = this.webroot + config.chatlog;
-
         console.log("Webroot is " + this.webroot);
         this.props = readProps();
+        this.logpath = !!this.props.sdcard ? this.props.sdcard : (this.webroot + config.chatlog);
         if (!!this.props.port)
         {
             this.port = Number(this.props.port);
@@ -105,6 +104,8 @@ function main()
         this.webroot = web.webroot
         this.path = '/'
         this.logpath = web.logpath;
+        
+        console.log("Logpath = " + this.logpath);
 
         // State Machine 
         this.set({
@@ -115,6 +116,16 @@ function main()
         {
             console.log('data event received ' + data);
             this.req.data += data;
+        }
+
+        this.exit = function()
+        {
+            console.log('process is going to terminate');
+            
+            this.filepath = this.webroot + "/cchess/exit.html";
+            setTimeout( process.exit , 60000);
+            this.result(1);
+            this.go();
         }
 
         // For a post request, try to collect post data
@@ -141,6 +152,11 @@ function main()
         {
             var wr = new webres()
             wr['Content-Type'] = this.filereq.mime
+            if (this.filereq.ext == "apk")
+            {
+            	wr['Content-Disposition'] = "attachment; filename=\""  
+                    + this.filereq.name + "\"";
+            }
             this.res.writeHead(200, wr)
             this.res.end(this.filereq.data)
             this.result(1)
@@ -191,6 +207,20 @@ function main()
         this.done = function()
         {
             console.log("Access " + this.req.url + " done");
+        }
+        
+        this.apk = function()
+        {
+        	this.filepath = web.props.apk;
+        	this.result(1);
+        	this.go();
+        }
+        
+        this.about = function()
+        {
+        	this.filepath = this.webroot + "/cchess/about.html";
+        	this.result(1);
+        	this.go();
         }
         
         this.pathparse = function(route)

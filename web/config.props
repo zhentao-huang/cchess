@@ -1,5 +1,6 @@
 port=7425
 main=node/main.js
 index=/cchess/game.html
-runlabel=ChinaChess
+runlabel=同玩象棋
 littlelable=shuttleplay.net
+sdfolder=cchess/playlog

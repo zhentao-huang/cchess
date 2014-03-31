@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>感谢使用</title>
+    <base href="/cchess/game.html"></base>
+    <link rel="stylesheet" type="text/css" media="screen" href="/pub/console.css" />
+    <META name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <META http-equiv="Pragma" content="no-cache"/>
+    <META http-equiv="Cache-Control" content="no-cache,no-store"/>
+    <script type="text/javascript" src="/pub/jquery.js"></script>
+    <script type="text/javascript" src="/pub/util.js"></script>
+    <script type="text/javascript" src="/pub/chat.js"></script>
+    <script type="text/javascript" src="callback.js"></script>
+    <script type="text/javascript" src="play.js"></script>
+    <script type="text/javascript" src="cchess.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var apk = window.location.protocol + "//" +  window.location.host + "/apk";
+
+        $("#qr").attr("src", "/qr/" + encodeURIComponent(apk))
+    });
+    </script>
+    
+</head>
+<body>
+     
+    <div id="page">
+        <h1 class="pageheader"><img src="/cchess/shuttleplay.png"/></h1>
+        <div id="content">
+            <h2>博弈象棋</h2>
+            <a href="http://shuttleplay.net/download/shuttleapp-release.apk"><img src="/cchess/shuttle.png" alt="Logo" width="96" height="96" style="float: right;" /></a>
+            <p>v1.0</p>
+            <p>2014-04-01</p>
+            <p/>
+            
+            <p>本游自带<a href="/cchess/exit.html">流传</a>功能，可以让你有Android设备的朋友，扫描下面的二维码，就可以是从你手机上下载到，无需接入互联网</p>
+            <p>本游开源项目,MIT许可证，欢迎访问<a href="http://shuttleplay.net">shuttleplay.net</a>
+            <p/>
+        </div>
+        
+    </div>
+    <h1 class="pageheader">
+        <img id="qr"></img>
+    </h1>
+    <!--
+    <div id="openModalblack" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>第二步让对手扫描下面的二维码进入游戏</h2>
+            你已选择了红棋，你的对手将执黑
+            <div align="center"><img id="blackqr" width="200px" height="200px"/> </div>
+            <p> 推荐用"条码扫描器"</p>
+        </div>
+    </div>
+    <div id="openModalred" class="modalDialog">
+        <div>
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>第二步让你对手用扫描扫下面的条码</h2>
+            你已选择了黑棋，你的对手将执红棋，你先行
+            <div align="center"><img id="redqr" width="200px" height="200px"/> </div>
+            <p> 推荐用"条码扫描器"</p>
+        </div>
+    </div>
+    -->
+    <div id="footer">
+        Powered by ShuttlePlay.
+    </div>
+</body>
+</html>

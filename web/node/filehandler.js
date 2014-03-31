@@ -75,10 +75,11 @@ filehandler.prototype.appended = function(err)
 filehandler.prototype.filter = function()
 {
     var extIndex = this.filename.lastIndexOf('.')
-    var ext = "";
     if (extIndex > 0 && extIndex < this.filename.length - 1)
     {
-        ext = this.filename.substring(extIndex + 1)
+        this.ext = this.filename.substring(extIndex + 1)
+        var nameIndex = this.filename.lastIndexOf('/');
+        this.name = this.filename.substring(nameIndex + 1);
     }
     else
     {
@@ -89,7 +90,7 @@ filehandler.prototype.filter = function()
 
     var mime = require('./mime');
 
-    this.mime = mime[ext];
+    this.mime = mime[this.ext];
     if (!!this.mime)
     {
         this.result(1)
