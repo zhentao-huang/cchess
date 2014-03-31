@@ -122,10 +122,11 @@ function main()
         {
             console.log('process is going to terminate');
             
-            this.filepath = this.webroot + "/cchess/exit.html";
-            setTimeout( process.exit , 60000);
+            this.res.writeHead(200);
+            this.res.end();
             this.result(1);
             this.go();
+            setTimeout(process.exit, 200);
         }
 
         // For a post request, try to collect post data
