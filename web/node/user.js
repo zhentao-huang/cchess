@@ -140,7 +140,7 @@ var registry = {
                     console.log('sys : heartbeat = ' + self.count);
                     self.send({id:'sys', count:self.count++, type:'string', message:'heart beat'});
                 },
-                60000
+                6000
             );
             this.count = 0;
         }

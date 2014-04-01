@@ -16,10 +16,13 @@
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript">
     // <![CDATA[
-        var set
+        var set;
+        var side;
+        var title;
         $(document).ready(function() {
 
             side = queryParam('side')
+            title = (side == "red") ? "元帅":"将军";
 
             match = startGame(side);
         
@@ -71,12 +74,12 @@
         {
             if (this.match.play.isMyTurn())
             {
-                $("#status")[0].innerHTML = "您的回合，请行棋"
+                $("#status")[0].innerHTML = title + "，请号令三军";
 //                $("#shout")[0].disabled = true;
             }
             else
             {
-                $("#status")[0].innerHTML = "对方行棋，请等待"
+                $("#status")[0].innerHTML = title + "，请静观其变";
 //                $("#shout")[0].disabled = false;
             }
         }

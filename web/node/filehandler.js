@@ -32,9 +32,30 @@ filehandler.prototype.stat = function(err, stats)
     this.go()
 }
 
+filehandler.prototype.statSync = function()
+{
+	this.stats = fs.statSync(this.filename);
+	if (!this.stats)
+	{
+		this.result(2);
+	}
+	else
+	{
+		this.result(1);
+	}
+	this.go();
+}
+
 filehandler.prototype.read = function()
 {
     fs.readFile(this.filename, this.result(1))
+}
+
+filehandler.prototype.readSync = function()
+{
+	this.data = fs.readFileSync(this.filename);
+	this.result((!!this.data) ? 1 : 2);
+	this.go();
 }
 
 filehandler.prototype.readed = function(err, data)

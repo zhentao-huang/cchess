@@ -286,6 +286,12 @@ function main()
                     ["read", 4],
                     ["readed", -1, -4]
                 ]
+//            this.filereq.set({
+//                states: [
+//                    ["filter", 1, -2],
+//                    ["statSync", 2, -3],
+//                    ["readSync", -1, -4]
+//                ]
             })
 
 
