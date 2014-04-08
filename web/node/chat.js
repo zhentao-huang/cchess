@@ -15,6 +15,7 @@ function Chat(req, res, logpath, sid)
 {
     cb.initStateMachine(this);
 
+    console.log('instance chat url = ' + req.url);
     this.id = req.rest.shift()
     this.action = req.rest.shift()
     this.ip = req.connection.remoteAddress;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>棋主</title>
+    <title>会友象棋</title>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -37,31 +37,29 @@
         $(function() {
         	console.log("$function");
             $("#modal").dialog({
-                autoOptn: true,
+                autoOpen: true,
                 modal: true,
-                width: 400,
-                /*
                 open : function(event, ui)
                 {
                     $(".ui-dialog-titlebar-close").hide();
                 },
-                */
                 
+                /*
                 buttons: [
                     {
                         text: "关闭",
                         click: function() {
-                            $("#modal").dialog("close");
-                            alert("关闭对话框");
+                            $(this).dialog("close");
                         }
-                    }/*,
+                    },
+                    
                     {
                         text: "Cancel",
                         click: function() {
                             $(this).dialog("close");
                         }
-                    }*/
-                ]
+                    }
+                ]*/
             });
 
         });
@@ -133,7 +131,7 @@
         {
             if (this.match.play.isMyTurn())
             {
-                $("#status")[0].innerHTML = title + "，请号令三军"
+                $("#status")[0].innerHTML = title + "，请排兵布阵"
 //                $("#shout")[0].disabled = true;
             }
             else
@@ -230,12 +228,11 @@
 <div id="status"></div>
 <!-- <button id="shout" type="button" onclick="javascript:shout()">Be quick</button> -->
     <!--<div id="openModal" class="modalDialog">-->
-    <div id="modal" title="扫描条码，开始游戏">
+    <div id="modal" title="扫描二维码，开始游戏">
         <div>
             <!--a id="closeModal" href="#close" title="Close" class="close">x</a-->
-            你已选择了<span id="yourside"></span>棋，你的对手将执<span id="opside"></span>棋
+            您已选择了<span id="yourside"></span>棋，您的对手将执<span id="opside"></span>棋
             <div align="center"><a id="playlink"><img id="qrtoplay" width="200px" height="200px"/></a> </div>
-            <p> 推荐用"条码扫描器"</p>
         </div>
     </div>
 </body>

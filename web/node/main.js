@@ -105,7 +105,7 @@ function main()
         this.path = '/'
         this.logpath = web.logpath;
         
-        console.log("Logpath = " + this.logpath);
+//        console.log(this.req.url);
 
         // State Machine 
         this.set({
@@ -134,18 +134,20 @@ function main()
         this.prepare = function()
         {
             this.req.data = '';
-//            console.log('NodeSession : req url = '+ req.url)
+            console.log('NodeSession prepare : req url = '+ req.url)
 
             if (this.req.method == 'POST' && req.readable)
             {
                 req.setEncoding('utf8');
                 req.on('data', this.callback('collectData'));
                 req.once('end', this.result(1));
+                console.log('prepare branch 1');
             }
             else
             {
                 this.result(1);
                 this.go();
+                console.log('prepare branch 2');
             }
         }
 
@@ -244,7 +246,8 @@ function main()
         {
             req.removeAllListeners(); 
             this.reqobj = url.parse(this.req.url, true)
-            console.log("Reqobj = " + JSON.stringify(this.reqobj));
+            /* BUG : next statement would cause sig 11, due to the string is too long*/
+//            console.log("Reqobj = " + JSON.stringify(this.reqobj));
 //            console.log("Accsse " + this.req.url);
 
 //            if (this.reqobj.pathname == 'favicon.ico')
@@ -360,6 +363,7 @@ function main()
 
         this.chat = function()
         {
+            console.log('enter chat');
             var sid = this.reqobj.query.sid;
             console.log("sid = " + sid);
             this.chatObj = new chat.Chat(req, res, this.logpath, sid);
@@ -470,6 +474,7 @@ function main()
 
     NodeWeb.prototype.dispatch = function(req, res)
     {
+        console.log('dispatch ' + req.url);
         var session = new NodeSession(req, res);
         this.sessions.push(session);
         session.start();

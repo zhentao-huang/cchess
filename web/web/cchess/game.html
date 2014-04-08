@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>对战象棋</title>
+    <title>会友象棋</title>
     <base href="/cchess/game.html"></base>
     <link rel="stylesheet" type="text/css" media="screen" href="/pub/console.css" />
     <META name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
@@ -17,7 +17,6 @@
 
 	$(document).ready(function() 
 	{
-            $("#localurl").text(window.location.href);
             var loc = window.location.protocol + "//" +  window.location.host;
 
             jQuery.ajax({
@@ -120,20 +119,19 @@
 <body>
      
     <div id="page">
-        <h1 class="pageheader">对战中国象棋</h1>
+        <h1 class="pageheader">会友象棋</h1>
         <div id="content">
-            <h2>准备</h2>
+            <h2>如何玩</h2>
             <img src="/cchess/icon.png" alt="Logo" width="96" height="96" style="float: right;" />
-            <p>先和朋友联入同一个Wifi网内，如果没有Wifi网络，可以打开Android手机的Wifi热点</p>
+            <p>本游戏只适合双人联入无线网玩,如果没有无线网络,可以打开您手机的Wifi热点</p>
             <p/>           
-            <p>你朋友的手机或平板,不管安卓还是苹果，是不需要安装游戏的，只有二维码扫描应用就可以了</p>
-            <p>没有扫描器也可以在浏览器中输入这个地址 <span id="localurl"></span></p>
+            <p>您朋友可以用手机或平板,无论安卓或苹果,扫描开局后的二维码,打开链接后就可以玩了</p>
         </div>
         
     </div>
     
     <div>
-        <h2> 第一步，请你先选择一方</h2>
+        <h2> 请您先选棋</h2>
         <table id="gametable">
             <tr>
                 <td>新开一局</td>
@@ -142,28 +140,8 @@
             </tr>
         </table>
     </div>
-    <!--
-    <div id="openModalblack" class="modalDialog">
-        <div>
-            <a href="#close" title="Close" class="close">X</a>
-            <h2>第二步让对手扫描下面的二维码进入游戏</h2>
-            你已选择了红棋，你的对手将执黑
-            <div align="center"><img id="blackqr" width="200px" height="200px"/> </div>
-            <p> 推荐用"条码扫描器"</p>
-        </div>
-    </div>
-    <div id="openModalred" class="modalDialog">
-        <div>
-            <a href="#close" title="Close" class="close">X</a>
-            <h2>第二步让你对手用扫描扫下面的条码</h2>
-            你已选择了黑棋，你的对手将执红棋，你先行
-            <div align="center"><img id="redqr" width="200px" height="200px"/> </div>
-            <p> 推荐用"条码扫描器"</p>
-        </div>
-    </div>
-    -->
     <div id="footer">
-        Powered by ShuttlePlay.
+        Powered by ShuttlePlay.net
     </div>
 </body>
 </html>

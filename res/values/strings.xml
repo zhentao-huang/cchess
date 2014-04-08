@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="app_name">同玩象棋</string>
-    <string name="about">关于...</string>
+    <string name="app_name">会友象棋</string>
+    <string name="about">关于</string>
     <string name="exit">退出</string>
 </resources>
