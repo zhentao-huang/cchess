@@ -33,7 +33,7 @@ function Chat(req, res, logpath, sid)
 
     this.set({
         states: [
-        ['parse', -1,1,2,3,4,5,7,8],    // 0
+        ['parse', -1,1,2,3,4,5,7,8,9],  // 0
         ['reg', 6],                     // 1
         ['send', 6],                    // 2
         ['query', 6],                   // 3
@@ -41,7 +41,8 @@ function Chat(req, res, logpath, sid)
         ['bye', 6],                     // 5
         ['reply', -2],                  // 6
         ['list', 6],                    // 7
-        ['load', 6]						// 8
+        ['load', 6],					// 8
+        ['clearlog', -2]				// 9
         ]});
         
     this.list = function()
@@ -49,11 +50,23 @@ function Chat(req, res, logpath, sid)
     	
     }
     
+    this.clearlog = function()
+    {
+    	if (!! regs.logfile)
+    	{
+    		delete regs.logfile;
+    		console.log('logfile deleted');
+    	}
+    	
+    	res.writeHead(200);
+    	res.end();
+    }
+    
     this.parse = function()
     {
         console.log(["Chat : ", this.id, this.action, ': parsing'].join(' '));
         var r = Chat.route.indexOf(this.action) + 2;
-        if (r >= 3 && (!regs.isExists(this.id) || !regs.verify(this.id, this.ip)))
+        if (r >= 3  && r<9 && (!regs.isExists(this.id) || !regs.verify(this.id, this.ip)))
         {
             r = 1;
         }
@@ -227,7 +240,7 @@ function Chat(req, res, logpath, sid)
     this.start();
 }
 
-Chat.route = ['reg', 'send', 'query', 'listen', 'bye', 'list', 'load'];
+Chat.route = ['reg', 'send', 'query', 'listen', 'bye', 'list', 'load', 'clearlog'];
 
 cb.applyStateMachine(Chat)
 

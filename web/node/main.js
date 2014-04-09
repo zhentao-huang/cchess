@@ -392,6 +392,18 @@ function main()
         	this.go();
         }
         
+        this.remove = function()
+        {
+        	var item = this.reqobj.rest.shift();
+        	delete store[item];
+        	
+        	console.log('item ' + item + ' removed');
+        	this.res.writeHead(200);
+        	this.res.end();
+        	this.result(1);
+        	this.go();
+        }
+        
         /*
         this.reg = function()
         {

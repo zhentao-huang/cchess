@@ -70,8 +70,25 @@
             if (!!log)
             {
                 u = u + "&sid=" + log;
+                window.open(u);
             }
-            window.open(u);
+            else
+            {
+                jQuery.ajax({
+                	url:'/chat/' + side + '/clearlog',
+                	success : function(data)
+                	{
+                		jQuery.ajax({
+                			url:'/remove/sid',
+                			success:function(data)
+                			{
+                				window.open(u);
+                			}
+                		});
+                	}
+                });
+            }
+
             /*
             nexus = new chater("tmp")
             nexus.setup = {
