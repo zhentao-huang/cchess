@@ -3,7 +3,7 @@
 module.exports = 
 {
     "address":'0.0.0.0',
-    "rootroute":['qr', 'chat', 'listlog', 'loadlog', 'save', 'load', 'exit', 'apk', 'about', 'remove'],
+    "rootroute":['qr', 'chat', 'listlog', 'loadlog', 'save', 'load', 'exit', 'apk', 'remove'],
     "indexfile":"index.html",
     "chatlog" : "/playlog",
     "states":[
@@ -20,15 +20,14 @@ module.exports =
                 ['qr', 6],                          // 10
                 ['chat', 4, 6],                     // 11
                 ["urlparse", 4, 9, 10, 11, 13, 14,
-                    15, 16, 17, 18, 19, 20],        // 12 
+                    15, 16, 17, 18, 19],        	// 12 
                 ['listlog', 6],                     // 13
                 ['loadlog', 6],			    		// 14
                 ['save', 6],			    		// 15
                 ['load', 6],                        // 16
                 ['exit', -1],                       // 17
                 ['apk', 9], 						// 18
-                ['about', 9],						// 19
-                ['remove', 6]						// 20
+                ['remove', 6]						// 19
         ]
 
 }

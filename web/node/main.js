@@ -219,13 +219,6 @@ function main()
         	this.go();
         }
         
-        this.about = function()
-        {
-        	this.filepath = this.webroot + "/cchess/about.html";
-        	this.result(1);
-        	this.go();
-        }
-        
         this.pathparse = function(route)
         {
             var p = this.reqobj.rest
