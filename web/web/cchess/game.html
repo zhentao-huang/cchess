@@ -70,7 +70,7 @@
             if (!!log)
             {
                 u = u + "&sid=" + log;
-                window.open(u);
+                window.open(u, "_self");
             }
             else
             {
@@ -82,7 +82,7 @@
                 			url:'/remove/sid',
                 			success:function(data)
                 			{
-                				window.open(u);
+                				window.open(u, "_self");
                 			}
                 		});
                 	}
