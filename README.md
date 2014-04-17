@@ -2,9 +2,9 @@
 
 ## Overview
 
-Chinese Chess is the first web page game based on [node4android](/zhentao-huang/node4android). 
+Chinese Chess is the first web page game based on [node4android](https://github.com/zhentao-huang/node4android). 
 
-It is essentially a demonstration. It's either a template project for [ShuttlePlay](shuttleplay.net) game framework.
+It is essentially a demonstration. It's either a template project for [ShuttlePlay](http://shuttleplay.net) game framework.
 
 ShuttlePlay is for multi-players game with multiple mobile devices. I called it "One installation, Multiple devices play together".
 
@@ -21,7 +21,7 @@ Your opponent need neither installs same game, nor cares about which kind of his
 The game has no UI components, because UI is in a browser i.e. Chrome, It's just a web server hosting a page game.
 
 ## How to build
-The project depends on [node4android](/zhentao-huang/node4android). 
+The project depends on [node4android](https://github.com/zhentao-huang/node4android). 
 So you need load these two projects in same workspace of Eclipse, and setup dependency.
     Open Chinese Chess project "Properties", choose "Andorid", in "Library" list add "NodeAndroid"
 
