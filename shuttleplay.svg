@@ -9,22 +9,22 @@
       ><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath2"
-      ><path d="M0 0 L0 100 L190 100 L190 0 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath3"
-      ><path d="M-0.5 -0.5 L-0.5 99.5 L189.5 99.5 L189.5 -0.5 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4"
-      ><path d="M0 0 L0 310 L470 310 L470 0 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath5"
-      ><path d="M-0.5 -0.5 L-0.5 309.5 L469.5 309.5 L469.5 -0.5 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath6"
       ><path d="M0 0 L0 100 L180 100 L180 0 Z"
       /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath7"
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath3"
       ><path d="M-0.5 -0.5 L-0.5 99.5 L179.5 99.5 L179.5 -0.5 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4"
+      ><path d="M0 0 L0 100 L190 100 L190 0 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath5"
+      ><path d="M-0.5 -0.5 L-0.5 99.5 L189.5 99.5 L189.5 -0.5 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath6"
+      ><path d="M0 0 L0 310 L470 310 L470 0 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath7"
+      ><path d="M-0.5 -0.5 L-0.5 309.5 L469.5 309.5 L469.5 -0.5 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8"
       ><path d="M0 0 L0 110 L190 110 L190 0 Z"
@@ -87,86 +87,88 @@
       ><path d="M-0.5 -0.5 L-0.5 189.5 L509.5 189.5 L509.5 -0.5 Z"
       /></clipPath
     ></defs
-    ><g fill="aqua" font-size="14" font-family="sans-serif" transform="translate(130.5,160.5)" stroke="aqua"
-    ><rect x="0" y="0" clip-path="url(#clipPath3)" width="189" opacity="0.5" height="99" stroke="none"
-      /><rect x="0" y="0" clip-path="url(#clipPath3)" fill="none" width="189" height="99" stroke="black"
+    ><g fill="lime" font-size="14" font-family="sans-serif" transform="translate(380.5,310.5)" stroke="lime"
+    ><rect x="0" y="0" clip-path="url(#clipPath3)" width="179" opacity="0.5" height="99" stroke="none"
+      /><rect x="0" y="0" clip-path="url(#clipPath3)" fill="none" width="179" height="99" stroke="black"
       /><text fill="black" x="10" xml:space="preserve" y="28" clip-path="url(#clipPath3)" stroke="none"
-      >/web/web/cchess</text
+      >/web/node</text
       ><text fill="black" x="10" xml:space="preserve" y="62" clip-path="url(#clipPath3)" stroke="none"
-      >FrontEnd web code of</text
+      >Web Server based on</text
       ><text fill="black" x="10" xml:space="preserve" y="79" clip-path="url(#clipPath3)" stroke="none"
-      >Chinese Chess</text
-      ><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="175" y1="10" y2="10" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="175" y1="35" y2="35" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="175" x2="175" y1="10" y2="35" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="140" y1="10" y2="15" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="15" y2="15" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="20" y2="20" stroke="black"
+      >state machine </text
+      ><line clip-path="url(#clipPath3)" fill="none" x1="130" x2="165" y1="10" y2="10" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="130" x2="165" y1="35" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="165" x2="165" y1="10" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="130" x2="130" y1="10" y2="15" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="125" x2="135" y1="15" y2="15" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="125" x2="135" y1="20" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="125" x2="125" y1="15" y2="20" stroke="black"
       /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="135" y1="15" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="145" x2="145" y1="15" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="140" y1="20" y2="25" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="25" y2="25" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="30" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="130" x2="130" y1="20" y2="25" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="125" x2="135" y1="25" y2="25" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="125" x2="135" y1="30" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="125" x2="125" y1="25" y2="30" stroke="black"
       /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="135" y1="25" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="145" x2="145" y1="25" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="140" y1="30" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath3)" fill="none" x1="130" x2="130" y1="30" y2="35" stroke="black"
+    /></g
+    ><g fill="aqua" font-size="14" font-family="sans-serif" transform="translate(130.5,160.5)" stroke="aqua"
+    ><rect x="0" y="0" clip-path="url(#clipPath5)" width="189" opacity="0.5" height="99" stroke="none"
+      /><rect x="0" y="0" clip-path="url(#clipPath5)" fill="none" width="189" height="99" stroke="black"
+      /><text fill="black" x="10" xml:space="preserve" y="28" clip-path="url(#clipPath5)" stroke="none"
+      >/web/web/cchess</text
+      ><text fill="black" x="10" xml:space="preserve" y="62" clip-path="url(#clipPath5)" stroke="none"
+      >Frontend web code of</text
+      ><text fill="black" x="10" xml:space="preserve" y="79" clip-path="url(#clipPath5)" stroke="none"
+      >Chinese Chess</text
+      ><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="175" y1="10" y2="10" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="175" y1="35" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="175" x2="175" y1="10" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="140" y1="10" y2="15" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="15" y2="15" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="20" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="135" y1="15" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="145" x2="145" y1="15" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="140" y1="20" y2="25" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="25" y2="25" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="30" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="135" y1="25" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="145" x2="145" y1="25" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="140" y1="30" y2="35" stroke="black"
     /></g
     ><g fill="aqua" font-size="14" font-family="sans-serif" transform="translate(130.5,310.5)" stroke="aqua"
-    ><rect x="0" y="0" clip-path="url(#clipPath3)" width="189" opacity="0.5" height="99" stroke="none"
-      /><rect x="0" y="0" clip-path="url(#clipPath3)" fill="none" width="189" height="99" stroke="black"
-      /><text fill="black" x="10" xml:space="preserve" y="28" clip-path="url(#clipPath3)" stroke="none"
+    ><rect x="0" y="0" clip-path="url(#clipPath5)" width="189" opacity="0.5" height="99" stroke="none"
+      /><rect x="0" y="0" clip-path="url(#clipPath5)" fill="none" width="189" height="99" stroke="black"
+      /><text fill="black" x="10" xml:space="preserve" y="28" clip-path="url(#clipPath5)" stroke="none"
       >/web/web/pub</text
-      ><text fill="black" x="10" xml:space="preserve" y="62" clip-path="url(#clipPath3)" stroke="none"
-      >FrontEnd common part</text
-      ><text fill="black" x="10" xml:space="preserve" y="79" clip-path="url(#clipPath3)" stroke="none"
+      ><text fill="black" x="10" xml:space="preserve" y="62" clip-path="url(#clipPath5)" stroke="none"
+      >Frontend common part</text
+      ><text fill="black" x="10" xml:space="preserve" y="79" clip-path="url(#clipPath5)" stroke="none"
       >(jQuery, jQueryUI)</text
-      ><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="175" y1="10" y2="10" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="175" y1="35" y2="35" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="175" x2="175" y1="10" y2="35" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="140" y1="10" y2="15" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="15" y2="15" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="20" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="135" y1="15" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="145" x2="145" y1="15" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="140" y1="20" y2="25" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="25" y2="25" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="145" y1="30" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="135" x2="135" y1="25" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="145" x2="145" y1="25" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath3)" fill="none" x1="140" x2="140" y1="30" y2="35" stroke="black"
+      ><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="175" y1="10" y2="10" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="175" y1="35" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="175" x2="175" y1="10" y2="35" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="140" y1="10" y2="15" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="15" y2="15" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="20" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="135" y1="15" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="145" x2="145" y1="15" y2="20" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="140" y1="20" y2="25" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="25" y2="25" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="145" y1="30" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="135" x2="135" y1="25" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="145" x2="145" y1="25" y2="30" stroke="black"
+      /><line clip-path="url(#clipPath5)" fill="none" x1="140" x2="140" y1="30" y2="35" stroke="black"
     /></g
-    ><g fill="rgb(255,175,175)" font-size="14" font-family="sans-serif" transform="translate(110.5,110.5)" stroke="rgb(255,175,175)"
-    ><rect x="0" y="0" clip-path="url(#clipPath5)" width="188" opacity="0.5" height="20" stroke="none"
-      /><rect x="0" y="20" clip-path="url(#clipPath5)" width="469" opacity="0.5" height="289" stroke="none"
-      /><rect x="0" y="0" clip-path="url(#clipPath5)" fill="none" width="188" height="20" stroke="black"
-      /><rect x="0" y="20" clip-path="url(#clipPath5)" fill="none" width="469" height="289" stroke="black"
-      /><text fill="black" x="7" xml:space="preserve" y="17" clip-path="url(#clipPath5)" stroke="none"
+    ><g font-size="14" transform="translate(110.5,110.5)" fill-opacity="0" fill="rgb(0,0,0)" font-family="sans-serif" stroke="rgb(0,0,0)" stroke-opacity="0"
+    ><rect x="0" y="0" clip-path="url(#clipPath7)" width="188" opacity="0" height="20" stroke="none"
+      /><rect x="0" y="20" clip-path="url(#clipPath7)" width="469" opacity="0" height="289" stroke="none"
+    /></g
+    ><g font-family="sans-serif" font-size="14" transform="translate(110.5,110.5)"
+    ><rect fill="none" x="0" width="188" height="20" y="0" clip-path="url(#clipPath7)"
+      /><rect fill="none" x="0" width="469" height="289" y="20" clip-path="url(#clipPath7)"
+      /><text x="7" xml:space="preserve" y="17" clip-path="url(#clipPath7)" stroke="none"
       >/res/raw/web.zip</text
     ></g
-    ><g fill="lime" font-size="14" font-family="sans-serif" transform="translate(380.5,310.5)" stroke="lime"
-    ><rect x="0" y="0" clip-path="url(#clipPath7)" width="179" opacity="0.5" height="99" stroke="none"
-      /><rect x="0" y="0" clip-path="url(#clipPath7)" fill="none" width="179" height="99" stroke="black"
-      /><text fill="black" x="10" xml:space="preserve" y="28" clip-path="url(#clipPath7)" stroke="none"
-      >/web/node</text
-      ><text fill="black" x="10" xml:space="preserve" y="62" clip-path="url(#clipPath7)" stroke="none"
-      >State Machine </text
-      ><text fill="black" x="10" xml:space="preserve" y="79" clip-path="url(#clipPath7)" stroke="none"
-      >based Web server</text
-      ><line clip-path="url(#clipPath7)" fill="none" x1="130" x2="165" y1="10" y2="10" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="130" x2="165" y1="35" y2="35" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="165" x2="165" y1="10" y2="35" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="130" x2="130" y1="10" y2="15" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="125" x2="135" y1="15" y2="15" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="125" x2="135" y1="20" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="125" x2="125" y1="15" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="135" x2="135" y1="15" y2="20" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="130" x2="130" y1="20" y2="25" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="125" x2="135" y1="25" y2="25" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="125" x2="135" y1="30" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="125" x2="125" y1="25" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="135" x2="135" y1="25" y2="30" stroke="black"
-      /><line clip-path="url(#clipPath7)" fill="none" x1="130" x2="130" y1="30" y2="35" stroke="black"
-    /></g
     ><g fill="fuchsia" font-size="14" font-family="sans-serif" transform="translate(130.5,500.5)" stroke="fuchsia"
     ><rect x="0" y="0" clip-path="url(#clipPath9)" width="189" opacity="0.5" height="109" stroke="none"
       /><rect x="0" y="0" clip-path="url(#clipPath9)" fill="none" width="189" height="109" stroke="black"
