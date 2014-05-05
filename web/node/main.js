@@ -344,11 +344,8 @@ function main()
             wr = new webres();
             wr["Content-Type"] = 'image/png';
             buf = process.str2qr(str);
-            console.log("QR : retrieved success " + str);
             this.res.writeHead(200, wr)
-            console.log("QR : write heard");
             this.res.end(buf);
-            console.log("QR : end");
             this.result(1);
             this.go();
             return;
